@@ -1,0 +1,236 @@
+What is your experience with Entity Framework and its versions?
+
+EF Core 8.0
+
+packages:
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.InMemory
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite
+Microsoft.EntityFrameworkCore.Tools
+
+-------------------------------------------------------------------------
+Entity Framework interview questions explore your understanding of object-relational mapping (ORM), including how EF works, different approaches, key concepts, and practical applications. Common questions cover topics like DbContext, DbSet, migrations, code-first vs. database-first, lazy loading, eager loading, and concurrency handling. 
+---------------------------------------------------------------------------------------------
+What is Entity Framework? 
+
+EF is an ORM framework for .NET that simplifies database interactions by allowing developers to work with object-oriented models rather than directly with SQL. 
+
+---------------------------------------------------------------------------------------------
+Explain what is CodeFirst in ef?
+Entity Framework Code First allows you to use your own domain classes to represent the model that EF relies on to perform querying, change tracking, and updating functions.
+
+---------------------------------------------------------------------------------------------
+Explain the different approaches to working with Entity Framework (Code-First, Database-First, Model-First)?
+Code-First: Defines the database schema in C# classes, then EF generates the database based on the classes. 
+Database-First: Creates the database first and then generates C# classes and the EDMX file from the existing database schema. 
+Model-First: Allows you to design the model visually in the EDMX designer, then generate the database and C# classes. 
+---------------------------------------------------------------------------------------------
+
+What are migrations and why are they useful? 
+
+Migrations allow you to make changes to your database schema over time without having to drop and recreate the database. 
+They provide a way to track changes to your database schema, making it easier to manage and update your database. 
+
+---------------------------------------------------------------------------------------------
+What is the difference between lazy loading and eager loading? 
+
+Lazy Loading: Loads related entities only when they are explicitly accessed. 
+Eager Loading: Loads related entities along with the parent entity in a single query. 
+
+---------------------------------------------------------------------------------------------
+How does EF handle database concurrency? 
+
+EF provides mechanisms to handle concurrency, such as optimistic locking (checking the current state of the entity) and pessimistic locking (locking the row during the transaction). 
+
+---------------------------------------------------------------------------------------------
+What is the purpose of the DbContext class? 
+DbContext is a class that represents a session with the database and provides the ability to perform CRUD operations. 
+
+----------------------------------------------------------------------------------------------------------------------
+What are the key components of Entity Framework Core? 
+Key components include DbContext, DbSet, entities (C# classes representing database tables), and configurations. 
+
+----------------------------------------------------------------------------------------------------------------------
+What are navigation properties?
+Navigation properties are properties in your entity classes that hold references to related entities. 
+
+----------------------------------------------------------------------------------------------------------------------
+What is the .edmx file?
+The .edmx file (Entity Data Model file) is a visual representation of your database schema and the relationships between entities. 
+
+----------------------------------------------------------------------------------------------------------------------
+How can you improve the performance of applications using Entity Framework? 
+Techniques include using AsNoTracking(), optimizing queries, and using stored procedures where appropriate. 
+
+----------------------------------------------------------------------------------------------------------------------
+What is the purpose of the Include() method? 
+The Include() method is used for eager loading related entities in a single query. 
+----------------------------------------------------------------------------------------------------------------------
+How do you configure a one-to-many relationship using Fluent API? 
+You can use Fluent API to configure relationships between entities in your C# classes. 
+----------------------------------------------------------------------------------------------------------------------
+What is the purpose of the AsNoTracking() method? 
+The AsNoTracking() method is used to disable change tracking for a query, potentially improving performance if you don't need to track changes to the entities. 
+----------------------------------------------------------------------------------------------------------------------
+How do you perform a raw SQL query in Entity Framework? 
+You can use the FromSqlRaw() method to execute a raw SQL query and return the results as entities. 
+----------------------------------------------------------------------------------------------------------------------
+What are entity states in EF? 
+Entity states include Unchanged, Added, Modified, and Deleted, representing the state of an entity within the context. 
+----------------------------------------------------------------------------------------------------------------------
+What is a composite key? 
+A composite key is a primary key that consists of multiple columns. 
+----------------------------------------------------------------------------------------------------------------------
+Additional Tips for Interview Preparation:
+Practice writing LINQ queries.
+Understand the different types of inheritance supported by EF.
+Be familiar with the concept of change tracking.
+Understand the difference between Dapper and Entity Framework. 
+----------------------------------------------------------------------------------------------------------------------
+explain Entity Framework Code First ?
+Entity Framework Code First allows you to use your own domain classes to represent the model that EF relies on to perform querying, change tracking, and updating functions.
+
+Code First is an approach to database development where the database schema is generated from code rather than the other way around. It allows developers to focus on the application’s domain model and write code to define the database schema.
+
+In this blog post, we will create three classes, Book, Publisher, and Author, and configure them using OnModelCreating in Entity Framework Code First.
+
+--------------------------------------------------------------------------------------------------------------------------
+DbContext.OnModelCreating(DbModelBuilder) Method
+
+The DbContext class is the main entry point for working with a database using Entity Framework Core.
+
+The OnConfiguring method is overridden to configure the connection string for the database. 
+In this case, the connection string is retrieved from an appsettings.json file using the ConfigurationBuilder class from the Microsoft.Extensions.Configuration namespace. The UseSqlServer method is then used to configure the DbContextOptionsBuilder to use SQL Server as the database provider.
+
+The OnModelCreating method is overridden to configure the mapping between the model classes and the database schema. 
+This method is used to define the tables, columns, relationships, and constraints in the database schema.
+--------------------------------------------------------------------------------------------------------------------------
+Migrations:
+
+Migrations are used in Entity Framework Core to apply changes to the database schema as the data model changes. Migrations allow us to evolve the database schema over time in a consistent and controlled manner. They are moreso useful when there is more than one developer working on a project.
+
+To create a migration for the LibraryContext class above, we first need to install the Entity Framework Core tools package. This can be done using the following command in the Package Manager Console (Tools > NuGet Package Manager > Package Manager Console):
+
+Install-Package Microsoft.EntityFrameworkCore.Tools or thru package manager from tools 
+
+Once we have the tools installed, we can use the following command in the Package Manager Console to create a new migration:
+
+Add-Migration InitialCreate			-- powershell command 
+
+This will create a new migration class named InitialCreate in the Migrations folder of our project. The migration class contains two methods: Up and Down. The Up method is used to apply the changes to the database schema, while the Down method is used to revert the changes.
+
+Now that we have created the migration, we can apply it to our database by running the following command in the Package Manager Console:
+
+Update-Database
+
+This will apply the migration to the database specified in the OnConfiguring method of our LibraryContext class. Once the migration has been applied, we can verify that our database has been updated by querying the __EFMigrationsHistory table in the database. If this is your first time applying migrations, the database will also be created.
+
+SELECT * FROM __EFMigrationsHistory
+
+If we need to make further changes to our database schema, we can make changes to our models, or add new models, then create additional migrations using the Add-Migration command, and then apply those migrations using the Update-Database command. Each migration will build on the previous migrations, so we can easily make incremental changes to our database schema over time as our application evolves.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+what is navigation property in entity framework?
+
+In Entity Framework, a navigation property is a property on an entity type that allows you to traverse relationships between entities. It's essentially a way to access related data from one entity to another without directly interacting with foreign keys. Think of it as a bridge connecting related tables in a database. 
+
+Key Concepts:
+Relationships:
+Navigation properties are defined on entity types to represent relationships like one-to-one, one-to-many, and many-to-many. 
+Data Access:
+They allow you to move from one entity to related entities using their defined relationships, making it easier to work with related data. 
+Foreign Keys:
+While navigation properties are defined on entity types, they are built on top of foreign keys in the underlying database. 
+Optional:
+Navigation properties are optional on both ends of a relationship. You can have one-way or two-way navigation. 
+Data Types:
+The data type of a navigation property depends on the multiplicity of the related entity. For example, if a one-to-many relationship is defined, the navigation property on the "one" side will likely be a collection (e.g., List<T>) of the "many" side. 
+
+ex:
+
+    public class Customer
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } // Navigation property to related Orders
+    }
+
+    public class Order
+    {
+        public int Id { get; set; }
+        public int CustomerId { get; set; } // Foreign key to Customer
+        public virtual Customer Customer { get; set; } // Navigation property to related Customer
+    }
+In this example, Orders in Customer and Customer in Order are navigation properties, allowing you to navigate between related entities. 
+
+In essence, navigation properties provide a clean and object-oriented way to work with relationships in Entity Framework, simplifying data access and management. 
+
+
+Purpose:
+Navigation properties represent relationships between entities in your data model. They make it easier to work with complex data models and retrieve related data without having to write complex SQL queries.
+
+Types:
+There are two main types of navigation properties:
+
+Reference Navigation Properties: 
+These hold a reference to a single related entity. For example, an Employee entity might have a Department navigation property that points to a single Department object.
+
+Collection Navigation Properties: These hold a reference to a collection of related entities. For example, a Department entity might have an Employees navigation property that holds a list of Employee objects.
+
+
+Navigation properties in Entity Framework are a powerful tool for managing relationships between entities. They simplify data access, make your data model more intuitive, and provide efficient data loading capabilities. By understanding and leveraging navigation properties, you can create more maintainable, readable, and efficient applications.
+--------------------------------------------------------------------------------------------------------------------------
+
+What is the main class used in EF ?
+The main class that coordinates EF functionality for a given data model is the DbContext database context class. This class is created by deriving from the Microsoft. EntityFrameworkCore. DbContext class.
+
+------------------------------------------------------------------------------
+how do you scaffold models?
+Scaffolding in EF Core involves generating C# code (models and DbContext) from an existing database. This allows you to interact with the database using code instead of writing SQL queries. 
+-You can use the Scaffold-DbContext command in the Package Manager Console (PMC) or 
+-the dotnet ef dbcontext scaffold command in the .NET CLI. 
+
+Here's a step-by-step guide using the .NET CLI:
+1. Prerequisites:
+Ensure you have a database with the desired structure.
+Install the necessary NuGet packages for EF Core and your chosen database provider (e.g., Microsoft.EntityFrameworkCore.SqlServer for SQL Server).
+Install the Microsoft.EntityFrameworkCore.Tools package. 
+2. Command-line Interface (CLI) Method: 
+Navigate to your project's directory in the terminal.
+Run the following command, replacing placeholders with your actual values: 
+Code
+
+dotnet ef dbcontext scaffold \
+    "Data Source=YourServer;Initial Catalog=YourDatabase;Integrated Security=True;" \
+    Microsoft.EntityFrameworkCore.SqlServer -o Models -n YourNamespace -c YourDbContextName
+"Data Source=...": Your database connection string. This example uses Windows authentication. 
+Microsoft.EntityFrameworkCore.SqlServer: The database provider for your chosen database. 
+
+-o Models: Specifies the output directory for the generated files (e.g., the "Models" folder). 
+-n YourNamespace: Specifies the namespace for the generated classes (e.g., YourNamespace). 
+-c YourDbContextName: Specifies the name for the DbContext class (e.g., YourDbContextName). 
+
+3. Package Manager Console (PMC) Method:
+Open the Package Manager Console in Visual Studio (Tools > Package Manager Console).
+Run the following command: 
+Code
+
+Scaffold-DbContext "Data Source=YourServer;Initial Catalog=YourDatabase;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -n YourNamespace -c YourDbContextName -F
+The options are similar to the CLI command. 
+
+4. Post-Scaffolding:
+The command will generate model classes (representing your database tables) and a DbContext class. 
+You can now use these classes to interact with your database using EF Core. 
+Key Considerations:
+Connection String: Make sure your connection string is correct and allows EF Core to connect to the database. 
+Database Provider: Choose the appropriate database provider package for your database (e.g., SQL Server, MySQL, PostgreSQL, SQLite). 
+Output Directory: Choose a suitable directory for the generated files (e.g., "Models"). 
+Namespace and DbContext Name: Choose meaningful names for the namespace and DbContext class. 
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
