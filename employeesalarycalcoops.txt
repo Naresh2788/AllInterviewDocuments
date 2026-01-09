@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+// Base abstract class for Employee, defining the common contract for salary calculation
+public abstract class Employee
+{
+    public string Name { get; set; }
+    public int EmployeeId { get; set; }
+
+    public Employee(string name, int employeeId)
+    {
+        Name = name;
+        EmployeeId = employeeId;
+    }
+
+    // Abstract method to be implemented by derived classes
+    public abstract double CalculateSalary();
+
+    public void DisplayEmployeeDetails()
+    {
+        Console.WriteLine($"Employee ID: {EmployeeId}, Name: {Name}");
+    }
+}
+
+// Derived class for Full-Time Employees
+public class FullTimeEmployee : Employee
+{
+    public double MonthlySalary { get; set; }
+
+    public FullTimeEmployee(string name, int employeeId, double monthlySalary)
+        : base(name, employeeId)
+    {
+        MonthlySalary = monthlySalary;
+    }
+
+    // Implementation of CalculateSalary for Full-Time Employees
+    public override double CalculateSalary()
+    {
+        return MonthlySalary;
+    }
+}
+
+// Derived class for Contract Employees
+public class ContractEmployee : Employee
+{
+    public double HourlyRate { get; set; }
+    public int HoursWorked { get; set; }
+
+    public ContractEmployee(string name, int employeeId, double hourlyRate, int hoursWorked)
+        : base(name, employeeId)
+    {
+        HourlyRate = hourlyRate;
+        HoursWorked = hoursWorked;
+    }
+
+    // Implementation of CalculateSalary for Contract Employees
+    public override double CalculateSalary()
+    {
+        return HourlyRate * HoursWorked;
+    }
+}
+
+// Example usage
+public class PayrollSystem
+{
+    public static void Main(string[] args)
+    {
+        List<Employee> employees = new List<Employee>
+        {
+            new FullTimeEmployee("Alice Smith", 101, 5000),
+            new ContractEmployee("Bob Johnson", 201, 25, 160)
+        };
+
+        foreach (var employee in employees)
+        {
+            employee.DisplayEmployeeDetails();
+            Console.WriteLine($"Calculated Salary: {employee.CalculateSalary():C}");
+            Console.WriteLine("--------------------");
+        }
+    }
+}

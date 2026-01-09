@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// Define the Purchase class
+public class Purchase
+{
+    public int Id { get; set; }
+    public string Shopper { get; set; }
+    public string ProductCategory { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Initialize the list of purchases
+        List<Purchase> purchases = new List<Purchase>
+        {
+            new Purchase { Id = 1, Shopper = "Bob", ProductCategory = "ProductCatogory1" },
+            new Purchase { Id = 2, Shopper = "Alice", ProductCategory = "ProductCatogory1" },
+            new Purchase { Id = 3, Shopper = "Bob", ProductCategory = "ProductCatogory2" },
+            new Purchase { Id = 4, Shopper = "Bob", ProductCategory = "ProductCatogory3" }
+        };
+   // Find shoppers who purchased only a single product category
+        var singleCategoryShoppers = purchases
+        .GroupBy(p => p.Shopper)
+        .Where(g => g.Select(p => p.ProductCategory).Distinct().Count() == 1)
+        .Select(g => g.Key);
+
+        Console.WriteLine("Shoppers who purchased from only a single product category:");
+        foreach (var shopper in singleCategoryShoppers)
+        {
+            Console.WriteLine(shopper);
+        }
+    }
+}

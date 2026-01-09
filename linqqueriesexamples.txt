@@ -1,0 +1,37 @@
+
+Linq Examples:
+
+employee
+https://dotnetfiddle.net/Lr5qGn
+
+
+purchase
+https://dotnetfiddle.net/NMUTCG
+
+ocpexample:
+https://dotnetfiddle.net/0R0YfW
+
+employee linq descending query
+https://dotnetfiddle.net/LAT2ir
+
+basic program
+https://dotnetfiddle.net/4F86hK
+
+
+array ascending
+https://dotnetfiddle.net/xCF9xm
+
+
+Extension Method
+https://dotnetfiddle.net/vp8S6J
+
+
+orderby
+https://dotnetfiddle.net/u1ZQ6Z
+
+employee department
+https://dotnetfiddle.net/gC9gJT
+
+
+groupbydepartment employee count
+https://dotnetfiddle.net/WAb6os

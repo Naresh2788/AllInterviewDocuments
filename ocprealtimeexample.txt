@@ -1,0 +1,59 @@
+using System;
+namespace OCPDemo
+{
+    //Define an abstract class or interface for employee salary calculation
+    public interface IEmployee
+    {
+        double CalculateSalary();
+    }
+    //Implement this interface for each employee type
+    public class FullTimeEmployee : IEmployee
+    {
+        public double HourlyRate { get; set; }
+        public double CalculateSalary()
+        {
+            return HourlyRate * 160;
+        }
+    }
+    public class PartTimeEmployee : IEmployee
+    {
+        public double HourlyRate { get; set; }
+        public double HoursWorked { get; set; }
+        public double CalculateSalary()
+        {
+            return HourlyRate * HoursWorked;
+        }
+    }
+    public class Intern : IEmployee
+    {
+        public double HourlyRate { get; set; }
+        public double HoursWorked { get; set; }
+        public double CalculateSalary()
+        {
+            return HourlyRate * HoursWorked * 0.5;
+        }
+    }
+    //Create a simple salary calculator that works for any employee type
+    public class SalaryCalculator
+    {
+        public double CalculateSalary(IEmployee employee)
+        {
+            return employee.CalculateSalary();
+        }
+    }
+    
+    //Testing the Open-Closed Principle
+    public class Program
+    {
+        public static void Main()
+        {
+            var fullTime = new FullTimeEmployee { HourlyRate = 25 };
+            var salaryCalculator = new SalaryCalculator();
+            Console.WriteLine($"Full-Time Employee Salary: ${salaryCalculator.CalculateSalary(fullTime)}");
+            var intern = new Intern { HourlyRate = 20, HoursWorked = 80 };
+            Console.WriteLine($"Intern Salary: ${salaryCalculator.CalculateSalary(intern)}");
+            
+            Console.ReadKey();
+        }
+    }
+}

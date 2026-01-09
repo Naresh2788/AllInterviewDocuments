@@ -1,0 +1,7 @@
+https://www.scholarhat.com/tutorial/csharp/linq-in-csharp
+
+Task<User> CreateUser(User user)
+Task<User> UpdateUser(User user)
+Task<int?> DeleteUserById(int UserId)
+Task<IEnumerable<User>> GetUserList()
+Task<User> GetUSersById(int UserId)

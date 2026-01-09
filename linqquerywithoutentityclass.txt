@@ -1,0 +1,84 @@
+sing System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+public class MyDbContext : DbContext
+{
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Order> Orders { get; set; }
+
+    // Your DbContext configuration (e.g., connection string)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("YourConnectionString"); // Replace with your actual connection string
+    }
+}
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; } // Navigation property
+    public ICollection<Order> Orders { get; set; } // Navigation property
+}
+
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Product> Products { get; set; } // Navigation property
+}
+
+public class Order
+{
+    public int Id { get; set; }
+    public int ProductId { get; set; }
+    public int Quantity { get; set; }
+    public DateTime OrderDate { get; set; }
+    public Product Product { get; set; } // Navigation property
+}
+
+public class DataFetcher
+{
+    public void FetchData()
+    {
+        using (var context = new MyDbContext())
+        {
+            var results = from p in context.Products
+                          join c in context.Categories on p.CategoryId equals c.Id
+                          join o in context.Orders on p.Id equals o.ProductId
+                          where p.Id == 1 // Example: Filter for a specific product
+                          select new // Projecting into an anonymous type
+                          {
+                              ProductName = p.Name,
+                              CategoryName = c.Name,
+                              OrderedQuantity = o.Quantity,
+                              OrderDate = o.OrderDate
+                          };
+
+            foreach (var item in results)
+            {
+                Console.WriteLine($"Product: {item.ProductName}, Category: {item.CategoryName}, Ordered Quantity: {item.OrderedQuantity}, Order Date: {item.OrderDate}");
+            }
+        }
+    }
+}
+Use code with caution.
+
+Explanation
+from p in context.Products: This initializes the query with the Products table.
+join c in context.Categories on p.CategoryId equals c.Id: This performs an inner join with the Categories table based on the CategoryId.
+join o in context.Orders on p.Id equals o.ProductId: This performs an inner join with the Orders table based on the ProductId.
+where p.Id == 1: This filters the results for a specific product (optional).
+select new { ... }: This is the crucial part that creates an anonymous type. You specify the properties you want to include in the result and assign values from the joined tables. Each property in the anonymous type will have the name you provide (e.g., ProductName, CategoryName).
+foreach (var item in results): You can then iterate through the results, accessing the properties of the anonymous type. 
+Key takeaways
+Anonymous Types: You don't need to define a separate class for the result if you only need a temporary structure to hold the data.
+LINQ Join: LINQ's join operator allows you to join multiple tables based on common columns.
+Projection: The select new { ... } syntax allows you to project the data into a new shape, including only the columns you need and creating custom properties as required. 
+This approach offers flexibility when you need to retrieve data from multiple tables without the overhead of creating dedicated classes for each possible query result.
+AI responses may include mistakes. Learn more
+
+
