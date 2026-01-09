@@ -1,0 +1,71 @@
+
+How to create Robust system in .net core
+1)Design the application using modular component
+2)leverage .net core built in DI container to manage component dependencies
+3)optimizer i/o operation
+4)implement caching for frequently used data
+5)implement authentication and authorization for security
+6)implement logging framework for debugging and performance monitoring
+7)implement a combination of unit tests and integration test to validate code functionality
+
+How to Preventing System crashes
+1)Global Exception handling using custom middleware
+2)Proper disposal of unmanaged resources
+3)Implement Retry and Timeout policies to prevent indefinite waiting
+4)Implement Async programming to prevent blocking operation
+5)Implement loggin and monitoring for debugging and analysis
+6)Regular updates and Patching of existing packages
+
+
+
+how to culture fit with Client
+1)Be clear and concise-Use simple, direct language and speak at a steady pace.
+2)Use visuals: Supplement verbal communication with diagrams, charts, and 
+other visuals to explain complex ideas more effectively.
+3)Research about client's culture
+4)Promote open communication: feel safe to ask clarifying questions and raise concerns without fear of judgment.
+5)Maintain transparency and regular contact
+6)Focus on client solutions
+
+
+
+client requrements process:
+1)Define project goals
+
+2)Identify stakeholders
+
+3)Prepare for meeting
+
+4)Focus on understanding the client's needs by listening carefully to their verbal and non-verbal cues.
+
+5)Don't make assumptions. If something is unclear, 
+ask questions to confirm your understanding and 
+verify your interpretation of their business processes.
+
+6)Document everything: Record all requirements, assumptions, 
+and decisions made during the meeting in a clear, transparent, and organized manner.
+
+7)Review and confirm:Share the documented requirements with the client to ensure everyone has a shared and 
+accurate understanding. Ask for confirmation on any ambiguities.
+
+8)Internal review:Discuss the gathered requirements with your project team to ensure a 
+common understanding before proceeding.
+
+9)Finalize and approve:finalize the requirements document, and obtain formal approval from the client.
+
+
+
+Pipeline issue
+
+1)Syntax erros:missing semicolons, incorrect variable names
+
+2)Unit or integration tests failing due to broken code, 
+incorrect configurations, or dependency mismatches
+
+3)Pipeline lacking necessary permissions to access resources 
+
+4)Incorrect or missing dependencies
+
+5)Environment Differences
+
+6)Jobs or tasks exceeding their configured timeout limits
