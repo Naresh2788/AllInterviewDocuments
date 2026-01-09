@@ -1,0 +1,57 @@
+Azure Function
+What is azure Function and Types of Triggers?
+what is Durable function?
+How to check exception in Azure Function?
+how to secure Azure function?
+Web API to sending messages – Which layer receives the message first?
+Handling huge volume of messages in Service Bus – How to divide messages?
+Durable Functions – What are they and how do they work?
+Default timeout in Azure Functions
+how to Recover lost messages in Service Bus
+what is Cold start in Azure Functions
+Partition key in Cosmos DB
+What is Topic?
+how to Configure in Azure Functions
+Available hosting plans in Azure Functions
+how to Improving latency in HTTP-triggered Azure Functions
+Blob trigger in Azure Functions
+Pub-sub in Azure Functions – What to implement if it fails?
+how to Deploy Azure Functions to production
+how to deploy azure function in docker container
+how to integrate blob storage in azure function
+
+
+1.What is Managed Identity and types of managed identity.
+2.How to configure azure key vault
+3.how to handle azure function exception
+4.what is azure function and types of azure function.
+5.how orchestration function ends
+6.what is autoscaling
+7.what is condition in alerts
+8.what is azure monitor
+9.componnet is azure service bus
+10.what is blob container and types.
+11.differenece between azure function and durable function.
+12.how to secure azure function.
+
+
+blob storage
+1.what is blob.
+2.what is type of blob
+3.what is access tier in blob
+4.what is soft delete and by default time
+5.how to retrieve images after delete soft delete?
+6.What is Metadata in Blob Storage(used for the seraching and filtering?
+7.what is etag and use of the etag (etag is unique identifier so used for the updating or deleting):
+8.what is Size of the blob types?
+9.what is SAS Key and types when its choose?
+10.How do you handle errors and exception in blob.
+11.how do you optimize performance in blob.
+12.how do you secure data in azure blob storage.
+13.what is retry policies in blob.
+14.What data include in SAS Key.
+15.What is Azure Queue Storage?: Describe the purpose and benefits of using Azure Queue Storage.
+16. Queue Storage Architecture: Explain the architecture of Azure Queue Storage, including queues, messages, and clients.
+17. Message Handling: Describe how messages are handled in Azure Queue Storage, including message visibility, timeouts, and retries.
+18. Queue Storage Security: Discuss the security features of Azure Queue Storage, including authentication, authorization, and encryption.
+19. Use Cases for Queue Storage: Provide examples of use cases for Azure Queue Storage, such as decoupling applications, handling background tasks, and processing message
